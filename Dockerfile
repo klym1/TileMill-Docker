@@ -1,8 +1,6 @@
 FROM ubuntu:18.04 AS Mapnik
 
-ENV BOOST_INSTALL_VERSION=1.60.0 \
-    MAPNIK_INSTALL_VERSION=3.0.21 \
-    PATH=/usr/pgsql-11/bin:$PATH \
+ENV MAPNIK_INSTALL_VERSION=3.0.23 \
     CC=/usr/bin/clang \
     CXX=/usr/bin/clang++ \
     LD_LIBRARY_PATH=/usr/local/lib
@@ -27,29 +25,31 @@ RUN apt-get update && apt-get install -y \
 	    ttf-unifont ttf-dejavu ttf-dejavu-core ttf-dejavu-extra \
 	    git \
 	    python3-nose \
-    	libgdal-dev python3-gdal \
-        node-gyp \
-        libssl1.0-dev \
-        nodejs \
-        curl \
-        npm \
-        nano   
+    	libgdal-dev python3-gdal 
     
 WORKDIR /opt
-   
+       
 RUN git clone -b v${MAPNIK_INSTALL_VERSION} --single-branch --recursive https://github.com/mapnik/mapnik.git
     
-WORKDIR /opt/mapnik   
+WORKDIR /opt/mapnik
 RUN ./configure CXX=clang++ CC=clang && \
     make && \
-    make install && \
-    # Cleanup source downloads and install working folders
-    rm -rf /opt/mapnik
+    make install
+
+RUN rm -rf /opt/mapnik
 
 WORKDIR /opt/
 RUN git clone https://github.com/tilemill-project/tilemill.git
 
 WORKDIR /opt/tilemill
+
+RUN apt-get install -y \
+ node-gyp \
+ libssl1.0-dev \
+ nodejs \
+ curl \
+ npm \
+ nano     
 
 RUN node -v
 RUN npm -v
