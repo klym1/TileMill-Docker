@@ -63,4 +63,6 @@ RUN npm -v
 
 RUN npm install
 
+COPY config.defaults.json /opt/tilemill/lib/config.defaults.json
+
 ENTRYPOINT ["npm", "start"]
