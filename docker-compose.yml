@@ -1,0 +1,9 @@
+version: '3'
+services:
+  docs:
+     container_name: tilemill
+     ports:
+      - 20008:20008
+      - 20009:20009
+     build: 
+       context: .
