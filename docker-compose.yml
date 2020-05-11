@@ -14,5 +14,7 @@ services:
      environment:
        POSTGRES_PASSWORD: "postgres"
        POSTGRES_USER: "postgres"
+     volumes:
+       - C:/inspireadressen:/opt/inspireadressen  
      ports:
       - 5432:5432
