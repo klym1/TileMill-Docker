@@ -6,10 +6,11 @@ services:
       - 20008:20008
       - 20009:20009
      build: 
-       context: .
+       context: Tilemill/.
   postgres:
-     image: mdillon/postgis
      container_name: postgis
+     build: 
+       context: Postgres/.
      environment:
        POSTGRES_PASSWORD: "postgres"
        POSTGRES_USER: "postgres"
