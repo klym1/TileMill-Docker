@@ -56,6 +56,19 @@ RUN npm -v
 
 RUN npm install
 
+RUN apt-get install -y \
+ ruby-full \
+ imagemagick
+
+RUN gem install rgeo \
+       && gem install rgeo-geojson \
+       && gem install faraday \
+       && gem install stringex \
+       && gem install mini_magick 
+       
 COPY config.defaults.json /opt/tilemill/lib/config.defaults.json
+COPY ruby-export /opt/ruby-export/
+
+RUN mkdir /opt/sections
 
 ENTRYPOINT ["npm", "start"]

@@ -1,6 +1,7 @@
 version: '3'
 services:
   tilemill:
+     restart: on-failure
      container_name: tilemill
      ports:
       - 20008:20008
@@ -9,6 +10,7 @@ services:
        context: Tilemill/.
      volumes:
        - ./Tilemill/MapBox-Projects:/root/Documents/MapBox  
+       - ./sections:/opt/sections  
   postgres:
      container_name: postgis
      build: 

@@ -1,0 +1,7 @@
+{
+  "paths": {
+    "exports": "/opt",
+    "projects": "/root/Documents/MapBox/",
+    "tilemill": "/opt/tilemill"
+  }
+}
